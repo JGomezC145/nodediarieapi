@@ -1,0 +1,18 @@
+{
+  "name": "nodediarie",
+  "version": "1.0.0",
+  "description": "Este es la aplicación node para las API de Diarie",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "run": "node index.js",
+    "dev": "node index.js"
+  },
+  "author": "JGomezC145",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase": "^8.6.8",
+    "nodemon": "^2.0.9"
+  }
+}
