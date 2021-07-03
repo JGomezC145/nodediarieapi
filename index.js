@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 var url = require('url');
-const port = 3000;
+const port = process.env.PORT || 3000;
 var dbCollection = 'ProductosData'
 var firebase = require("firebase/app");
 
