@@ -13,6 +13,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "firebase": "^8.6.8",
+    "momentjs": "^2.0.0",
     "nodemon": "^2.0.9"
   }
 }

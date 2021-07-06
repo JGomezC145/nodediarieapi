@@ -1,10 +1,12 @@
 // Firebase App (the core Firebase SDK) is always required and
 const express = require("express");
 const app = express();
+var moment = require('moment');
 var url = require('url');
 const port = process.env.PORT || 3000;
 var dbCollection = 'ProductosData'
 var firebase = require("firebase/app");
+const { AsyncResource } = require("async_hooks");
 
 
 function revAPIOwner(api) {
@@ -25,6 +27,8 @@ function revAPIValidate(api) {
     } else if (api === "Alza1405J") {
         return true
     } else if (api === "AlzaJJ01") {
+        return true
+    } else if (api === "Missis") {
         return true
     } else {
         return false
@@ -49,13 +53,14 @@ const db = firebase.firestore();
 
 
 app.get("/", (req, res) => {
+    console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] => DataRequest for ${req.pathname}: `, {Query: req.query, Hash: req.hash})
     res.send('Request denied. <br> <br> Error: <b>BadRequest-NoParams</b>');
 });
 
 app.get("/doc", async (req, res) => {
+    console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] => DataRequest for ${req.pathname}: `, {Query: req.query, Hash: req.hash})
     var q = url.parse(req.url, true).query
     //res.send({data: {code: q.code, api: q.api}})
-
     if (q.code || q.apiKey) {
         if (revAPIValidate(q.apiKey)) {
             var finalq = (q.code).toUpperCase();
@@ -76,6 +81,7 @@ app.get("/doc", async (req, res) => {
 })
 
 app.get("/colle", async (req, res) => {
+    console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] => DataRequest for ${req.pathname}: `, {Query: req.query, Hash: req.hash})
     var q = url.parse(req.url, true).query
     //res.send({data: {code: q.code, api: q.api}})
     if (q.code || q.collection || q.apiKey) {
@@ -111,6 +117,12 @@ app.get("/colle", async (req, res) => {
     } else {
         res.send('Request denied. <br> <br> Error: <b>BadRequest-NoParams</b>');
     }
+})
+
+app.get('/devs', async (req, res) => {
+    console.log(`[${moment().format("DD-MM-YYYY HH:mm:ss")}] => DataRequest for ${req.pathname}: `, {Query: req.query, Hash: req.hash})
+    //console.log(req)
+    res.send('Listo')
 })
 
 app.listen(port, () => {
